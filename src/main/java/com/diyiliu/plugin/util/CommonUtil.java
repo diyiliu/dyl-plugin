@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
  */
 public class CommonUtil {
 
-
     public static boolean isEmpty(String str) {
 
         if (str == null || str.trim().length() < 1) {
@@ -208,6 +207,17 @@ public class CommonUtil {
         return bytes;
     }
 
+    public static byte[] bytesReverse(byte[] bytes) {
+        int length = bytes.length;
+        byte[] array = new byte[length];
+
+        for (int i = 0; i < length; i++) {
+            array[i] = bytes[length - i - 1];
+        }
+
+        return array;
+    }
+
 
     public static String toHex(int i) {
 
@@ -337,6 +347,16 @@ public class CommonUtil {
         }
 
         return b;
+    }
+
+    public static byte checkSum(byte[] bytes) {
+        byte b = 0;
+        for (int i = 0; i < bytes.length; i++) {
+            b += bytes[i];
+            b %= 0x100;
+        }
+
+        return (byte) (0xFF - b);
     }
 
     public static int renderHeight(byte[] bytes) {
