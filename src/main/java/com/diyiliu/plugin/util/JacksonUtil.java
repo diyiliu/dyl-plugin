@@ -1,6 +1,7 @@
 package com.diyiliu.plugin.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,6 +24,8 @@ public class JacksonUtil {
     static {
         // 设置日期格式
         mapper.setDateFormat(DEFAULT_DATE_FORMAT);
+        // 忽略未知字段
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     /**
