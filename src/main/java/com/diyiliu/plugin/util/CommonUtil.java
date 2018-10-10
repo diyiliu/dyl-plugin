@@ -233,7 +233,6 @@ public class CommonUtil {
     }
 
     public static double keepDecimal(double d, int digit) {
-
         BigDecimal decimal = new BigDecimal(d);
         decimal = decimal.setScale(digit, RoundingMode.HALF_UP);
 
