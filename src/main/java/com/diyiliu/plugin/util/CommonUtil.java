@@ -323,6 +323,18 @@ public class CommonUtil {
         return array;
     }
 
+    public static byte[] packSIM(String sim, int length) {
+
+        byte[] array = new byte[length];
+        Long simL = Long.parseLong(sim);
+
+        for (int i = 0; i < array.length; i++) {
+            Long l = (simL >> (i * 8)) & 0xff;
+            array[array.length - 1 - i] = l.byteValue();
+        }
+        return array;
+    }
+
     public static String parseIMEI(byte[] bytes) {
 
         String imei = bytesToStr(bytes);
@@ -595,5 +607,32 @@ public class CommonUtil {
         }
         return str;
 
+    }
+
+
+    /**
+     *  组合原始指令
+     *  默认校验位为异或校验
+     *
+     * @param start
+     * @param end
+     * @param content
+     * @param check
+     * @return
+     */
+    public static byte[] buildRaw(byte[] start, byte[] end, byte[] content, boolean check){
+        ByteBuf buf = Unpooled.buffer();
+        buf.writeBytes(start);
+        buf.writeBytes(content);
+        if (check){
+            buf.writeByte(getCheck(content));
+        }
+        buf.writeBytes(end);
+
+        int length = buf.writerIndex();
+        byte[] raw = new byte[length];
+        buf.readBytes(raw);
+
+        return raw;
     }
 }
