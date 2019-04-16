@@ -549,6 +549,7 @@ public class CommonUtil {
         }
     }
 
+
     public static String canSystemtime(byte[] bytes) {
         String canSystemtime = null;
         try {
