@@ -3,8 +3,6 @@ package com.diyiliu.plugin.util;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -18,18 +16,17 @@ import java.util.Map;
  * Author: DIYILIU
  * Update: 2017-09-20 14:44
  */
-public class ConstantUtil {
-    private static Logger logger = LoggerFactory.getLogger(ConstantUtil.class);
 
+public class ConstantUtil {
     public final static String JSON_CHARSET = "UTF-8";
 
     public static void init(String file){
-        logger.info("初始化配置信息...");
+        System.out.println("初始化配置信息...");
         initSqlCache(file);
     }
 
     public static void init(String file, Map<String, String> conf) throws Exception{
-        logger.info("初始化配置信息...");
+        System.out.println("初始化配置信息...");
         initSqlCache(file);
 
         initDataSource(conf);
