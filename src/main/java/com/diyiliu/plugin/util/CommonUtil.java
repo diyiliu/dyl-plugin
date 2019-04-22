@@ -370,6 +370,33 @@ public class CommonUtil {
         return (byte) (0xFF - b);
     }
 
+    /**
+     * CRC16 校验
+     *
+     * @param bytes
+     * @return
+     */
+    public static byte[] checkCRC(byte[] bytes) {
+        long crc = 0xFFFF;
+        for (byte b : bytes) {
+            long temp = b & 0x00FF;
+            crc ^= temp;
+            for (int i = 0; i < 8; i++) {
+                if (0x01 == (crc & 0x0001)) {
+                    crc >>= 1;
+                    crc ^= 0xA001;
+                } else {
+                    crc >>= 1;
+                }
+            }
+        }
+        byte hi = new Long(crc & 0xFF).byteValue();
+        byte lo = new Long(crc >> 8 & 0xFF).byteValue();
+
+        return new byte[]{hi, lo};
+    }
+
+
     public static int renderHeight(byte[] bytes) {
         int plus = bytes[0] & 0x80;
 
