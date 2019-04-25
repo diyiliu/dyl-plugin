@@ -1,6 +1,7 @@
 package com.diyiliu.plugin.model;
 
 import io.netty.channel.ChannelHandlerContext;
+import lombok.Data;
 
 /**
  * Description: MsgPipeline
@@ -8,33 +9,12 @@ import io.netty.channel.ChannelHandlerContext;
  * Update: 2018-06-27 14:03
  */
 
+@Data
 public class MsgPipeline {
+
+    private boolean isOk;
+
+    private long time;
+
     private ChannelHandlerContext context;
-
-    private Long time;
-
-    public MsgPipeline() {
-
-    }
-
-    public MsgPipeline(ChannelHandlerContext context, Long time) {
-        this.context = context;
-        this.time = time;
-    }
-
-    public ChannelHandlerContext getContext() {
-        return context;
-    }
-
-    public void setContext(ChannelHandlerContext context) {
-        this.context = context;
-    }
-
-    public Long getTime() {
-        return time;
-    }
-
-    public void setTime(Long time) {
-        this.time = time;
-    }
 }

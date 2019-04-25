@@ -3,6 +3,7 @@ package com.diyiliu.plugin.util;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Map;
@@ -62,5 +63,9 @@ public class SpringUtil implements ApplicationContextAware {
 
     public static void init(String name){
         new ClassPathXmlApplicationContext("classpath:" + name);
+    }
+
+    public static void init(Class clazz){
+        new AnnotationConfigApplicationContext(clazz);
     }
 }
