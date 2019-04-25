@@ -39,20 +39,3 @@ dependencies {
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
-
-apply plugin: 'maven'
-
-def localMavenRepo = 'file://' + new File(System.getenv('GRADLE_USER_HOME')).absolutePath
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: localMavenRepo)
-
-            pom.project {
-                name = project.name
-                packaging = 'jar'
-                description = 'description'
-            }
-        }
-    }
-}
