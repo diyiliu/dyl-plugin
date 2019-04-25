@@ -1,5 +1,5 @@
 group 'com.diyiliu'
-version '1.0'
+version '2.0'
 
 apply plugin: 'java'
 
@@ -12,21 +12,22 @@ repositories {
 }
 
 ext{
-    springVersion = '5.0.4.RELEASE'
+    springVersion = '5.1.2.RELEASE'
 }
 
 dependencies {
     compile group: 'org.springframework', name: 'spring-core', version:"$springVersion"
     compile group: 'org.springframework', name: 'spring-context-support', version:"$springVersion"
     compile group: 'org.springframework', name: 'spring-jdbc', version:"$springVersion"
-    
-    compile group: 'io.netty', name: 'netty-all', version: '4.1.22.Final'
-    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
+
     compile group: 'com.alibaba', name: 'druid', version: '1.1.2'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.37'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.38'
+    
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.29.Final'
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
     compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
 
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
@@ -37,4 +38,21 @@ dependencies {
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+}
+
+apply plugin: 'maven'
+
+def localMavenRepo = 'file://' + new File(System.getenv('GRADLE_USER_HOME')).absolutePath
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: localMavenRepo)
+
+            pom.project {
+                name = project.name
+                packaging = 'jar'
+                description = 'description'
+            }
+        }
+    }
 }

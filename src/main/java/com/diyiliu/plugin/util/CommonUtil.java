@@ -1,7 +1,9 @@
 package com.diyiliu.plugin.util;
 
+import com.diyiliu.plugin.cache.ICache;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import org.apache.commons.collections.CollectionUtils;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -9,8 +11,7 @@ import javax.script.ScriptException;
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -602,7 +603,7 @@ public class CommonUtil {
     }
 
     /**
-     * 任意2进制字符串 转int
+     * 任意 2 进制字符串 转int
      *
      * @param BinaryString
      * @return
@@ -636,7 +637,6 @@ public class CommonUtil {
 
     }
 
-
     /**
      *  组合原始指令
      *  默认校验位为异或校验
@@ -661,5 +661,19 @@ public class CommonUtil {
         buf.readBytes(raw);
 
         return raw;
+    }
+
+    /**
+     * 更新缓存
+     *
+     * @param oldKeys
+     * @param tempKeys
+     * @param itemCache
+     */
+    public static void refreshCache(Set oldKeys, Set tempKeys, ICache itemCache) {
+        Collection subKeys = CollectionUtils.subtract(oldKeys, tempKeys);
+        for (Iterator iterator = subKeys.iterator(); iterator.hasNext(); ) {
+            itemCache.remove(iterator.next());
+        }
     }
 }
