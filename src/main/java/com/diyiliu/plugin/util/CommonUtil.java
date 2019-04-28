@@ -500,6 +500,61 @@ public class CommonUtil {
         return retVal;
     }
 
+
+    /**
+     * 字节转二进制字符串
+     *
+     * @param b
+     * @return
+     */
+    public static String byte2BinaryStr(byte b) {
+        StringBuffer strBuf = new StringBuffer();
+        for (int i = 0; i < 8; i++) {
+            int value = (b >> i) & 0x01;
+            strBuf.append(value);
+        }
+
+        return strBuf.toString();
+    }
+
+    public static String bytes2BinaryStr(byte[] bytes) {
+        StringBuffer strBuf = new StringBuffer();
+        for (byte b : bytes) {
+            strBuf.append(byte2BinaryStr(b));
+        }
+        return strBuf.toString();
+    }
+
+    /**
+     * 二进制字符串转字节数组
+     *
+     * @param str
+     * @return
+     */
+    public static byte binaryStr2Byte(String str) {
+        byte b = 0;
+        int length = str.length() > 8 ? 8 : str.length();
+        for (int i = 0; i < length; i++) {
+            b += Byte.parseByte(str.charAt(i) + "") << i;
+        }
+        return b;
+    }
+
+    public static byte[] binaryStr2Bytes(String str) {
+        int t = str.length() / 8;
+        int length = str.length() % 8 == 0 ? t : t + 1;
+        byte[] bytes = new byte[length];
+        for (int i = 0; i < length; i++) {
+            int index = str.length() > 8 ? 8 : str.length();
+            String strBuf = str.substring(0, index);
+            bytes[i] = binaryStr2Byte(strBuf);
+
+            str = str.substring(index);
+        }
+
+        return bytes;
+    }
+
     public static void main(String[] args) {
 
 
