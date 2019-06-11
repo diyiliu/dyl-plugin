@@ -11,20 +11,21 @@ repositories {
     jcenter()
 }
 
-ext{
+ext {
     springVersion = '5.1.2.RELEASE'
 }
 
 dependencies {
-    compile group: 'org.springframework', name: 'spring-core', version:"$springVersion"
-    compile group: 'org.springframework', name: 'spring-context-support', version:"$springVersion"
-    compile group: 'org.springframework', name: 'spring-jdbc', version:"$springVersion"
-    
+    compile group: 'org.springframework', name: 'spring-core', version: "$springVersion"
+    compile group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
+    compile group: 'org.springframework', name: 'spring-jdbc', version: "$springVersion"
+
     compile group: 'io.netty', name: 'netty-all', version: '4.1.29.Final'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
     compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+    compile group: 'joda-time', name: 'joda-time', version: '2.10.2'
 
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
