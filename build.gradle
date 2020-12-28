@@ -2,6 +2,7 @@ group 'com.diyiliu'
 version '2.0'
 
 apply plugin: 'java'
+apply plugin: "maven-publish"
 
 sourceCompatibility = 1.8
 
@@ -35,4 +36,16 @@ dependencies {
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.diyiliu.plugin'
+            artifactId = 'dyl-plugin'
+            version = '1.0'
+
+            from components.java
+        }
+    }
 }
