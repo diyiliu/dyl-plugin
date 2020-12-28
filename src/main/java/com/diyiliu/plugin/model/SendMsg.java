@@ -12,7 +12,7 @@ import lombok.Data;
 public class SendMsg {
     private Integer serial;
 
-    private Integer cmd;
+    private String cmd;
 
     private String device;
 

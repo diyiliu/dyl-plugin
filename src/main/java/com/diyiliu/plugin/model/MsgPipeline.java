@@ -17,4 +17,12 @@ public class MsgPipeline {
     private long time;
 
     private ChannelHandlerContext context;
+
+    public MsgPipeline() {
+    }
+
+    public MsgPipeline(ChannelHandlerContext context, long time) {
+        this.time = time;
+        this.context = context;
+    }
 }
